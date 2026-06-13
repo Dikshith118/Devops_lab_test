@@ -22,13 +22,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('Code Quality - PyLint') {
             steps {
-                bat 'pip install pylint && pylint app.py logic.py --exit-zero'
+                bat 'python -m pip install pylint && python -m pylint app.py logic.py --exit-zero'
             }
         }
 
@@ -51,21 +51,21 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    bat '''
+                    bat """
                         echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
                         docker push %DOCKER_IMAGE%:latest
-                    '''
+                    """
                 }
             }
         }
 
         stage('Deploy Container') {
             steps {
-                bat '''
-                    docker stop %CONTAINER_NAME% || true
-                    docker rm %CONTAINER_NAME% || true
+                bat """
+                    docker stop %CONTAINER_NAME% || exit 0
+                    docker rm %CONTAINER_NAME% || exit 0
                     docker run -d --name %CONTAINER_NAME% -p 5000:5000 %DOCKER_IMAGE%:latest
-                '''
+                """
             }
         }
     }
