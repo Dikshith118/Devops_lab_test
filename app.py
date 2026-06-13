@@ -225,4 +225,4 @@ def trigger_scenario(name):
     return jsonify({"status": "success", "message": f"Scenario {name} triggered"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
