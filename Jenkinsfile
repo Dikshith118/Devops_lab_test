@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "dikshith118/voise-hospital-predictor"
         CONTAINER_NAME = "voise-hospital-container"
+        PYTHON = "C:\\Users\\diksh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
     }
 
     stages {
@@ -22,13 +23,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"%PYTHON%" -m pip install -r requirements.txt'
             }
         }
 
         stage('Code Quality - PyLint') {
             steps {
-                bat 'python -m pip install pylint && python -m pylint app.py logic.py --exit-zero'
+                bat '"%PYTHON%" -m pip install pylint'
+                bat '"%PYTHON%" -m pylint app.py logic.py --exit-zero'
             }
         }
 
@@ -61,11 +63,9 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                bat """
-                    docker stop %CONTAINER_NAME% || exit 0
-                    docker rm %CONTAINER_NAME% || exit 0
-                    docker run -d --name %CONTAINER_NAME% -p 5000:5000 %DOCKER_IMAGE%:latest
-                """
+                bat "docker stop %CONTAINER_NAME% || exit 0"
+                bat "docker rm %CONTAINER_NAME% || exit 0"
+                bat "docker run -d --name %CONTAINER_NAME% -p 5000:5000 %DOCKER_IMAGE%:latest"
             }
         }
     }
