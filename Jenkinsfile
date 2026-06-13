@@ -5,6 +5,7 @@ pipeline {
         DOCKER_IMAGE = "dikshith118/voise-hospital-predictor"
         CONTAINER_NAME = "voise-hospital-container"
         PYTHON = "C:\\Users\\diksh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+        TRIVY = "C:\\ProgramData\\chocolatey\\bin\\trivy.exe"
     }
 
     stages {
@@ -36,7 +37,7 @@ pipeline {
 
         stage('Vulnerability Scan - Trivy') {
             steps {
-                bat 'trivy fs --severity HIGH,CRITICAL --exit-code 0 .'
+                bat '"%TRIVY%" fs --severity HIGH,CRITICAL --exit-code 0 .'
             }
         }
 
