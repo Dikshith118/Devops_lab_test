@@ -90,15 +90,6 @@ The command center of the application.
 -   **Smart Recommendations**: Dynamic list of actionable advice based on current alerts.
 -   **Simulation Controls**: Buttons to trigger specific emergency scenarios for testing.
 
-### 2. **Trends Analysis (`trends.html`)**
-Visualizes historical data to identify patterns.
--   **Charts**: Four interactive charts showing data over time:
-    -   Oxygen Levels
-    -   Occupancy Rates (Beds vs ICU)
-    -   Staff Availability vs Patient Inflow
-    -   Medical Stock Levels (Pharmacy & Blood)
--   **Auto-Update**: Charts refresh automatically as new data comes in.
-
 ### 3. **Alert History (`history.html`)**
 A log of all critical events.
 -   **Audit Trail**: Lists past alerts with timestamps, resource names, and severity levels.
