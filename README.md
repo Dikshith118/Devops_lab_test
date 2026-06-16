@@ -95,9 +95,7 @@ A log of all critical events.
 -   **Audit Trail**: Lists past alerts with timestamps, resource names, and severity levels.
 -   **Status Tracking**: Helps in post-incident analysis by showing when resources went critical.
 
-### 4. **System Settings (`settings.html`)**
-Configuration panel for hospital administrators.
--   **Threshold Adjustment**: Sliders and inputs to define what constitutes a "Critical" or "Warning" state.
+
 -   **Resource Ratios**: Configure safety ratios like `Staff per Patient` or `Oxygen per Patient`.
 -   **Dynamic Updates**: Changes apply immediately to the logic engine without restarting the server.
 
